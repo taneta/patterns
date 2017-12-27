@@ -20,7 +20,7 @@ def xy_to_segments(xy):
 
 def plot_path(xy_arr, segments_weights=None, clip=True, figsize=(6, 4), title='', 
               change_width=True, change_color=True, screen_lims=False, colorbar=True,
-              only_weighted=False, weight_threshold=0, show_joints=False, 
+              weight_threshold=None, show_joints=False, 
               feed_lines=False, **kwargs):
     """Plot trajectories on a screen and highlight segments with color and linewidth"""
    
@@ -43,7 +43,7 @@ def plot_path(xy_arr, segments_weights=None, clip=True, figsize=(6, 4), title=''
             linewidths = (1 + (sw-min(sw)/(max(sw)-min(sw) + 1e-16)) * 3)
             
     # Plot only segments where weight is higher than zero:
-    if (sw is not None) and only_weighted:
+    if (sw is not None) and (weight_threshold is not None):
         segments = segments[sw > weight_threshold]
         sw = sw[sw > weight_threshold]
 
@@ -81,71 +81,6 @@ def plot_path(xy_arr, segments_weights=None, clip=True, figsize=(6, 4), title=''
         
     return fig
 
-
-"""
-def plot_on_screen(x, y, figsize=(6, 4), clip=True, title='', color='steelblue', **kwargs):
-    # Plot data on screen.
-    if clip:
-        x = np.clip(x, 0, 1)
-        y = np.clip(y, 0, 1)
-    fig, ax = plt.subplots(1, 1, figsize=figsize)
-    plt.plot(x, y, color=color, **kwargs)
-    plt.title(title, fontsize=12, y=1.1)
-    ax.set_ylim([-0.05, 1.05])   
-    ax.set_xlim([-0.05, 1.05]) 
-    ax.invert_yaxis()
-    ax.xaxis.tick_top() 
-    return fig
-
-def plot_segments(xy_arr, figsize=(6, 4), title='', color='indigo', **kwargs):
-    # Plot a path on the screen. Input array - (x, y) coordinates
-
-    fig = plt.figure(figsize=figsize) 
-    ax = fig.add_subplot(111)
-    
-    for start, stop in zip(xy_arr[:-1], xy_arr[1:]):
-        x, y = zip(start, stop)
-        _ = plt.plot(x, y, color=color)
-    
-    plt.title(title, fontsize=12, y=1.1)
-    ax.set_ylim([-0.05, 1.05])   
-    ax.set_xlim([-0.05, 1.05])  
-    ax.invert_yaxis()
-    ax.xaxis.tick_top()   
-    
-    return fig
-
-def get_trajectories_by_patterns(x, y, seq, pattern):
-    
-    xy = np.vstack([x, y]).T
-    pattern_idxs = find_substr_idx(seq, pattern)
-    if len(pattern_idxs) > 0:
-        # take one point behind because direction is counted from prev poin to this one
-        slices = [xy[sl[0]-1:sl[1], ...] for sl in pattern_idxs if sl[0] != 0]
-        lines = np.array(slices)
-        lines = lines.swapaxes(0, 2) # for plotting
-        return lines
-
-    
-def plot_pattern(x, y, seq, pattern, figsize=(12, 9), title='', color='indigo', **kwargs):
-    #Plot trajectories which match the pattern
-
-    lines = get_trajectories_by_patterns(x, y, seq, pattern)
-    segm_starts, segm_ends = lines[0], lines[1]
-    
-    fig = plt.figure(figsize=figsize) 
-    ax = fig.add_subplot(111)
-
-    _ = plt.plot(segm_starts, segm_ends, c=color, **kwargs)
-    
-    plt.title(title, fontsize=12, y=1.1)
-    ax.set_ylim([-0.05, 1.05])   
-    ax.set_xlim([-0.05, 1.05])  
-    ax.invert_yaxis()
-    ax.xaxis.tick_top()   # move the X-Axis 
-    
-    return fig
-"""
 
 def plot_dir_segments(n_segments=12, n=1000):
     """Plot example of N segments"""

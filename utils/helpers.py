@@ -117,18 +117,25 @@ def traject_to_coord(angle, length, x_init=None, y_init=None):
     
     return  xy
 
-def slice_gen(data, timesteps, step=None):
+def slice_gen(data, timesteps, step=None, only_full=False):
     """Generates infinite loop of time slices for the given data.
-    Set step to 1 for overlaid sequences"""
+    Set step to 1 for overlaid sequences. Full to stop when slice is less than timesteps"""
     step = timesteps if step is None else step 
-    while True:
+    contin = True 
+    while contin:
         for idx in np.arange(0, len(data), step):
-            yield data[idx : idx + timesteps]
+            sl = data[idx : idx + timesteps]
+            if only_full:
+                if len(sl) == timesteps: 
+                    contin = False
+                    yield sl
+            else:
+                yield sl
 
 
-def slice_gen_batch(data, batch_size, timesteps, step=None):
+def slice_gen_batch(data, batch_size, timesteps, step=None, only_full=False):
     """Generates infinite loop of time slice batches for the given data"""
-    gen = slice_gen(data, timesteps, step)
+    gen = slice_gen(data, timesteps, step=step, only_full=only_full)
     while True:
         x_batch = np.empty((batch_size, timesteps, *data.shape[1:]))
         for i in range(batch_size):

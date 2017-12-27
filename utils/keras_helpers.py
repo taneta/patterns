@@ -28,17 +28,17 @@ def model_receptive_fields(model, input_dim):
         padding = None
         stride = None
 
-        if l_type == 'Conv2D':
-            kernel = l['config']['kernel_size'][1]
-            stride = l['config']['strides'][1]
+        if l_type == 'Conv1D':
+            kernel = l['config']['kernel_size'][0]
+            stride = l['config']['strides'][0]
             if stride != 1:
                 raise AssertionError("Function doesn't work for strides != 1.")
             padding = 0 if l['config']['padding'] == 'valid' else 1
             # TO DO: fix computation of padding size
 
-        elif l_type == 'MaxPooling2D':
-            kernel = l['config']['pool_size'][1]
-            stride = l['config']['strides'][1]
+        elif l_type == 'MaxPooling1D':
+            kernel = l['config']['pool_size'][0]
+            stride = l['config']['strides'][0]
             padding = 0 if l['config']['padding'] == 'valid' else 1
             
         elif l_type == 'Dense':
