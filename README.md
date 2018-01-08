@@ -1,4 +1,4 @@
-# Detect patterns in a data
+# Detect patterns in data
 
 In this project I work with eye-tracking data (eye-movements) and compare different approaches for detecting patterns in the trajectories of the movements: 
 
@@ -61,13 +61,29 @@ A slice of the data:
 
 ![Eye movements](imgs/et_data.png)
 
+#### Find patterns in strings
+
 Examples of patterns, detected from strings:
 
-![Pattern 1](imgs/pattern_0.png) ![Pattern 2](imgs/pattern_6.png) 
+![Pattern 1](imgs/pattern_0.png) ![Pattern 2](imgs/pattern_6.png) ![Pattern 3](imgs/pattern_13.png)
 
 The comparison of the pattern's coverage in real and permuted data:
 
 ![Coverage](imgs/compare_coverage.png)
+
+#### Find patterns using convolutional networks
+
+Highlighting the areas of a sequence which activates a filter in conv_1 layer:
+
+![Filter activations](conv1_2_act_on_data.png)
+
+Simulate data and plot heatmaps of gaze positions to understand the filter's properties (filter size equals 3):
+
+![Filter heatmaps](conv1_2_act_heatmap.png)
+
+Plot the best stimuli for the filter from the simulated data:
+
+![Filter examples](conv1_2_sim_data.png)
 
 
 ## Authors

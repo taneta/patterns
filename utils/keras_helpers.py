@@ -79,3 +79,12 @@ def filter_act_to_input(act_vector, model, layer, input_dim):
     acts = np.vstack([unit_act_to_input(n, x, input_dim, p, ks, s) for (n, x) in enumerate(act_vector)])
     acts = np.sum(acts, axis=0)
     return acts
+
+def get_filter_weights(model, fn, layer='conv1'):
+    """Get weights of a filter by its number and layer"""
+    
+    W = [l.get_weights()[0] for l in model.layers if l.name == layer][0]
+    W = np.squeeze(W)
+    W = np.moveaxis(W, 2, 0) 
+    
+    return W[fn, ...]
