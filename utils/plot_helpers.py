@@ -21,7 +21,7 @@ def xy_to_segments(xy):
 def plot_path(xy_arr, segments_weights=None, clip=True, figsize=(6, 4), title='', 
               change_width=True, change_color=True, screen_lims=False, colorbar=True,
               weight_threshold=None, show_joints=False, 
-              feed_lines=False, **kwargs):
+              feed_lines=False, width_mult=3, **kwargs):
     """Plot trajectories on a screen and highlight segments with color and linewidth"""
    
     # Reshape xy_arr to a sequence of segments [[(x0,y0),(x1,y1)],[(x1,y1),(x2,y2)],...]
@@ -40,7 +40,7 @@ def plot_path(xy_arr, segments_weights=None, clip=True, figsize=(6, 4), title=''
     if (sw is not None) and change_color:
             cmap = plt.get_cmap('plasma')
     if (sw is not None) and change_width:
-            linewidths = (1 + (sw-min(sw)/(max(sw)-min(sw) + 1e-16)) * 3)
+            linewidths = (1 + (sw-min(sw)/(max(sw)-min(sw) + 1e-16)) * width_mult)
             
     # Plot only segments where weight is higher than zero:
     if (sw is not None) and (weight_threshold is not None):
