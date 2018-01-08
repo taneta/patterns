@@ -63,11 +63,11 @@ A slice of the data:
 
 Examples of patterns, detected from strings:
 
-![Pattern 1](imgs/pattern_0.png) ![Pattern 2](imgs/pattern_6.png) ![Pattern 3](imgs/pattern_13.png)
+![Pattern 1](imgs/pattern_0.png) ![Pattern 2](imgs/pattern_6.png) 
 
 The comparison of the pattern's coverage in real and permuted data:
 
-![Coverage]('imgs/compare_coverage.png')
+![Coverage](imgs/compare_coverage.png)
 
 
 ## Authors
