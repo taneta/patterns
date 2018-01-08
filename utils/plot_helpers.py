@@ -97,14 +97,14 @@ def plot_dir_segments(n_segments=12, n=1000):
     _ = plt.scatter(x, y, c=dir_segm, cmap=plt.cm.tab20_r, s=15)
     return fig
 
-def plot_len_segments(move_len, factor_len):
+def plot_distr_segments(move_len, factor_len):
     """Plot distribution lengths into N segments"""
     
     labels = list(set(factor_len))
     colors = plt.cm.tab20_r
     
     fig, ax = plt.subplots(1, 1, figsize=(14, 4))
-    p = plt.hist(move_len, bins=50)
+    p = plt.hist(move_len, bins=100)
 
     for i, (l_s, l_e) in enumerate(labels):
         ax.axvspan(l_s, l_e, facecolor=COLORS[i][1],

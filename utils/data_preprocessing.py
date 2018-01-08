@@ -2,7 +2,7 @@ import numpy as np
 
 from move_length import tiny_moves_mask
 from move_direction import move_abs_direction
-from data_to_segments import angle_to_segments
+from data_to_segments import data_to_segments
 from helpers import repetitive_seq_mask
 
 
@@ -19,7 +19,7 @@ def merge_same_direction(df, n_directions):
     """Merge rows with movements towards the same direction"""
     
     move_dir = move_abs_direction(df.x.values, df.y.values, invert_y=True)
-    move_dir_chars = angle_to_segments(move_dir, n_segments=n_directions, segment_ranges=False)
+    move_dir_chars = data_to_segments(move_dir, n_segments=n_directions, segment_ranges=False)
     repet_moves = repetitive_seq_mask(move_dir_chars, include_boundary='last')
     repet_moves = np.concatenate([[False], repet_moves])
     df = df[~repet_moves]
