@@ -75,15 +75,15 @@ The comparison of the pattern's coverage in real and permuted data:
 
 Highlighting the areas of a sequence which activates a filter in conv_1 layer:
 
-![Filter activations](conv1_2_act_on_data.png)
+![Filter activations](imgs/conv1_2_act_on_data.png)
 
 Simulate data and plot heatmaps of gaze positions to understand the filter's properties (filter size equals 3):
 
-![Filter heatmaps](conv1_2_act_heatmap.png)
+![Filter heatmaps](imgs/conv1_2_act_heatmap.png)
 
 Plot the best stimuli for the filter from the simulated data:
 
-![Filter examples](conv1_2_sim_data.png)
+![Filter examples](imgs/conv1_2_sim_data.png)
 
 
 ## Authors
